@@ -1,1 +1,37 @@
 
+name: Build Vita Browser
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: vitasdk/vitasdk:latest
+
+    steps:
+      - name: Download source
+        uses: actions/checkout@v4
+
+      - name: Configure project
+        run: |
+          cmake -S . -B build \
+            -DCMAKE_TOOLCHAIN_FILE=$VITASDK/share/vita.toolchain.cmake \
+            -DCMAKE_BUILD_TYPE=Release
+
+      - name: Compile VPK
+        run: cmake --build build
+
+      - name: Upload VPK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vita-Browser-VPK
+          path: |
+            build/*.vpk
+            ./*.vpk
+          if-no-files-found: error
+          
