@@ -1,9 +1,7 @@
 
 #include <psp2/kernel/processmgr.h>
 #include <psp2/ctrl.h>
-#include <psp2/display.h>
 #include <vita2d.h>
-#include <stdio.h>
 
 int main(void) {
     sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG);
@@ -17,7 +15,6 @@ int main(void) {
 
         vita2d_start_drawing();
         vita2d_clear_screen();
-
         vita2d_end_drawing();
         vita2d_swap_buffers();
 
@@ -30,3 +27,4 @@ int main(void) {
     sceKernelExitProcess(0);
     return 0;
 }
+
