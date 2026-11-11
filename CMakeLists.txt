@@ -1,9 +1,6 @@
 
-cmake_minimum_required(VERSION 3.16)
 
-if(NOT DEFINED ENV{VITASDK})
-    message(FATAL_ERROR "VITASDK no esta configurado")
-endif()
+cmake_minimum_required(VERSION 3.16)
 
 include("$ENV{VITASDK}/share/vita.cmake")
 
@@ -22,7 +19,7 @@ target_link_libraries(${PROJECT_NAME}
     SceCtrl_stub
     SceDisplay_stub
     SceGxm_stub
-    SceKernel_stub
+    SceLibKernel_stub
 )
 
 vita_create_self(${PROJECT_NAME}.self ${PROJECT_NAME})
